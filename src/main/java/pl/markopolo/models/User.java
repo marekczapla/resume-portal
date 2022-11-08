@@ -8,6 +8,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+    @Column
     private String userName;
     private String password;
     private boolean isActive;
@@ -50,6 +51,18 @@ public class User {
     }
 
     public void setRoles(String roles) {
+        this.roles = roles;
+    }
+
+    public User() {
+
+    }
+
+    public User(int id, String userName, String password, boolean isActive, String roles) {
+        this.id = id;
+        this.userName = userName;
+        this.password = password;
+        this.isActive = isActive;
         this.roles = roles;
     }
 }
