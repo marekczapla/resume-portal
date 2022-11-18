@@ -20,9 +20,10 @@ public class UserProfile {
     private String designation;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "education_id")
+    @JoinColumn(name = "id")
     List<Education> educationList = new ArrayList<>();
-    @JoinColumn(name = "job_id")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "id")
     List<Job> jobs = new ArrayList<>();
 
     public List<Job> getJobs() {

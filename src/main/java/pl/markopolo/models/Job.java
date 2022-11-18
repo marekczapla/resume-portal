@@ -1,5 +1,7 @@
 package pl.markopolo.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.security.cert.LDAPCertStoreParameters;
 import java.time.LocalDate;
@@ -16,7 +18,9 @@ public class Job {
     private int id;
     private String company;
     private String designation;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate startDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
     private boolean isCurrentJob;
     @ElementCollection(targetClass = String.class)
