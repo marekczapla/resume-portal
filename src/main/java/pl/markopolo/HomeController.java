@@ -21,7 +21,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home() {
-        return "hello";
+        return "index";
     }
 
     @GetMapping("/edit")
@@ -40,6 +40,25 @@ public class HomeController {
         }
         model.addAttribute("userProfile", userProfile);
         return "profile-edit";
+    }
+
+    @GetMapping("/delete")
+    public String delete(Model model, Principal principal, @RequestParam(required = false) String type,
+                         @RequestParam int index) {
+        String userId = principal.getName();
+        model.addAttribute("userId", userId);
+        Optional<UserProfile> userProfileOptional = userProfileRepository.findByUserName(userId);
+        userProfileOptional.orElseThrow(() -> new RuntimeException("Not found: " + userId));
+        UserProfile userProfile = userProfileOptional.get();
+        if ("job".equals(type)) {
+            userProfile.getJobs().remove(index);
+        } else if ("education".equals(type)) {
+            userProfile.getEducationList().remove(index);
+        } else if ("skill".equals(type)) {
+            userProfile.getSkills().add("");
+        }
+        userProfileRepository.save(userProfile);
+        return "redirect:/edit";
     }
 
     @PostMapping("/edit")

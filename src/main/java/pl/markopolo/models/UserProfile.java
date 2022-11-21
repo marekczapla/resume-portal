@@ -11,7 +11,7 @@ public class UserProfile {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private String userName;
-    private int chosenTheme;
+    private int theme;
     private String summary;
     private String firstName;
     private String lastName;
@@ -109,11 +109,11 @@ public class UserProfile {
     }
 
     public int getChosenTheme() {
-        return chosenTheme;
+        return theme;
     }
 
-    public void setChosenTheme(int chosenTheme) {
-        this.chosenTheme = chosenTheme;
+    public void setTheme(int theme) {
+        this.theme = theme;
     }
 
     public String getSummary() {
