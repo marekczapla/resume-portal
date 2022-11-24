@@ -1,5 +1,7 @@
 package pl.markopolo.models;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -23,6 +25,7 @@ public class Job {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endDate;
     private boolean isCurrentJob;
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ElementCollection(targetClass = String.class)
     private List<String> responsibilities = new ArrayList<>();
 
@@ -34,14 +37,13 @@ public class Job {
         this.responsibilities = responsibilities;
     }
 
-    public  boolean isCurrentJob() {
+    public boolean isCurrentJob() {
         return isCurrentJob;
     }
 
     public void setCurrentJob(boolean currentJob) {
         isCurrentJob = currentJob;
     }
-
 
     public int getId() {
         return id;

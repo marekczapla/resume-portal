@@ -34,7 +34,7 @@ public class HomeController {
         if ("job".equals(add)) {
             userProfile.getJobs().add(new Job());
         } else if ("education".equals(add)) {
-            userProfile.getEducationList().add(new Education());
+            userProfile.getEducations().add(new Education());
         } else if ("skill".equals(add)) {
             userProfile.getSkills().add("");
         }
@@ -53,7 +53,7 @@ public class HomeController {
         if ("job".equals(type)) {
             userProfile.getJobs().remove(index);
         } else if ("education".equals(type)) {
-            userProfile.getEducationList().remove(index);
+            userProfile.getEducations().remove(index);
         } else if ("skill".equals(type)) {
             userProfile.getSkills().add("");
         }
@@ -88,6 +88,6 @@ public class HomeController {
         model.addAttribute("userProfile", userProfile);
         System.out.println(userProfile.getJobs());
 
-        return "profile-templates/" + userProfile.getChosenTheme() + "/index";
+        return "profile-templates/" + userProfile.getTheme() + "/index";
     }
 }

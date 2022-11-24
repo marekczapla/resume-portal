@@ -1,5 +1,8 @@
 package pl.markopolo.models;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,9 +22,11 @@ public class UserProfile {
     private String phone;
     private String designation;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id")
-    List<Education> educationList = new ArrayList<>();
+    List<Education> educations = new ArrayList<>();
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "id")
     List<Job> jobs = new ArrayList<>();
@@ -34,15 +39,16 @@ public class UserProfile {
         this.jobs = jobs;
     }
 
-    public List<Education> getEducationList() {
-        return educationList;
+    public List<Education> getEducations() {
+        return educations;
     }
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @ElementCollection(targetClass = String.class)
     List<String> skills = new ArrayList<>();
 
-    public void setEducationList(List<Education> educationList) {
-        this.educationList = educationList;
+    public void setEducations(List<Education> educations) {
+        this.educations = educations;
     }
     public List<String> getSkills() {
         return skills;
@@ -108,7 +114,7 @@ public class UserProfile {
         this.userName = userName;
     }
 
-    public int getChosenTheme() {
+    public int getTheme() {
         return theme;
     }
 
